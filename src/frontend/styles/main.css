@@ -1,0 +1,323 @@
+/**
+ * Ze Funnel Main Styles
+ * Default theme and base styling
+ */
+
+/* Reset and base styles */
+.ze-funnel * {
+  box-sizing: border-box;
+}
+
+.ze-funnel {
+  --ze-primary: #3b82f6;
+  --ze-primary-hover: #2563eb;
+  --ze-secondary: #6b7280;
+  --ze-success: #10b981;
+  --ze-error: #ef4444;
+  --ze-warning: #f59e0b;
+  
+  --ze-bg: #ffffff;
+  --ze-surface: #f9fafb;
+  --ze-border: #e5e7eb;
+  
+  --ze-text-primary: #111827;
+  --ze-text-secondary: #6b7280;
+  --ze-text-muted: #9ca3af;
+  
+  --ze-radius: 8px;
+  --ze-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  --ze-shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  
+  --ze-transition: all 0.2s ease-in-out;
+}
+
+/* Container */
+.ze-funnel-container {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* Loading state */
+.ze-funnel-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 20px;
+  color: var(--ze-text-secondary);
+  font-size: 16px;
+}
+
+.ze-funnel-loading::before {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--ze-border);
+  border-top: 2px solid var(--ze-primary);
+  border-radius: 50%;
+  margin-right: 12px;
+  animation: ze-spin 1s linear infinite;
+}
+
+/* Error states */
+.ze-funnel-error {
+  background: var(--ze-error);
+  color: white;
+  padding: 16px;
+  border-radius: var(--ze-radius);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Progress bar */
+.ze-progress-bar {
+  width: 100%;
+  height: 8px;
+  background: var(--ze-surface);
+  border-radius: 4px;
+  overflow: hidden;
+  margin-bottom: 32px;
+}
+
+.ze-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--ze-primary) 0%, var(--ze-primary-hover) 100%);
+  border-radius: 4px;
+  transition: width 0.3s ease-out;
+}
+
+.ze-progress-text {
+  text-align: center;
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--ze-text-secondary);
+}
+
+/* Question container */
+.ze-question {
+  margin-bottom: 32px;
+}
+
+.ze-question-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--ze-text-primary);
+  margin-bottom: 16px;
+  line-height: 1.3;
+}
+
+.ze-question-description {
+  font-size: 16px;
+  color: var(--ze-text-secondary);
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+/* Input types */
+.ze-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.ze-text-input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--ze-border);
+  border-radius: var(--ze-radius);
+  font-size: 16px;
+  transition: var(--ze-transition);
+  background: var(--ze-bg);
+}
+
+.ze-text-input:focus {
+  outline: none;
+  border-color: var(--ze-primary);
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+.ze-text-input.error {
+  border-color: var(--ze-error);
+}
+
+/* Selection options */
+.ze-options-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 16px;
+}
+
+.ze-option {
+  padding: 20px;
+  border: 2px solid var(--ze-border);
+  border-radius: var(--ze-radius);
+  background: var(--ze-bg);
+  cursor: pointer;
+  transition: var(--ze-transition);
+  text-align: center;
+  position: relative;
+}
+
+.ze-option:hover {
+  border-color: var(--ze-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--ze-shadow);
+}
+
+.ze-option.selected {
+  border-color: var(--ze-primary);
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.ze-option-image {
+  width: 100%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.ze-option-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+  display: block;
+}
+
+.ze-option-text {
+  font-weight: 500;
+  color: var(--ze-text-primary);
+}
+
+/* Navigation */
+.ze-navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 32px;
+  gap: 16px;
+}
+
+.ze-btn {
+  padding: 12px 24px;
+  border: none;
+  border-radius: var(--ze-radius);
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: var(--ze-transition);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  text-decoration: none;
+}
+
+.ze-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.ze-btn-primary {
+  background: var(--ze-primary);
+  color: white;
+}
+
+.ze-btn-primary:hover:not(:disabled) {
+  background: var(--ze-primary-hover);
+  transform: translateY(-1px);
+  box-shadow: var(--ze-shadow);
+}
+
+.ze-btn-secondary {
+  background: var(--ze-surface);
+  color: var(--ze-text-primary);
+  border: 1px solid var(--ze-border);
+}
+
+.ze-btn-secondary:hover:not(:disabled) {
+  background: var(--ze-border);
+}
+
+/* Thank you screen */
+.ze-thank-you {
+  text-align: center;
+  padding: 48px 20px;
+}
+
+.ze-thank-you-icon {
+  font-size: 64px;
+  color: var(--ze-success);
+  margin-bottom: 24px;
+}
+
+.ze-thank-you-title {
+  font-size: 32px;
+  font-weight: 600;
+  color: var(--ze-text-primary);
+  margin-bottom: 16px;
+}
+
+.ze-thank-you-message {
+  font-size: 18px;
+  color: var(--ze-text-secondary);
+  margin-bottom: 32px;
+  line-height: 1.6;
+}
+
+/* Validation errors */
+.ze-field-error {
+  color: var(--ze-error);
+  font-size: 14px;
+  margin-top: 4px;
+}
+
+/* Animations */
+@keyframes ze-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ze-fade-in {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.ze-fade-in {
+  animation: ze-fade-in 0.3s ease-out;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .ze-funnel {
+    padding: 16px;
+  }
+  
+  .ze-question-title {
+    font-size: 20px;
+  }
+  
+  .ze-options-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .ze-navigation {
+    flex-direction: column-reverse;
+    gap: 12px;
+  }
+  
+  .ze-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
+/* Dark mode support */
+@media (prefers-color-scheme: dark) {
+  .ze-funnel {
+    --ze-bg: #1f2937;
+    --ze-surface: #111827;
+    --ze-border: #374151;
+    --ze-text-primary: #f9fafb;
+    --ze-text-secondary: #d1d5db;
+    --ze-text-muted: #9ca3af;
+  }
+}

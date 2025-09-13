@@ -1,0 +1,61 @@
+{
+  "name": "ze-funnel",
+  "version": "1.0.0",
+  "description": "WordPress Conversational Funnel Plugin - Modular qualification funnels with Svelte frontend",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:admin": "vite --config vite.admin.config.js",
+    "build": "vite build && vite build --config vite.admin.config.js",
+    "preview": "vite preview",
+    "lint": "eslint . --ext .js,.svelte,.vue --fix",
+    "format": "prettier --write .",
+    "check": "svelte-check --tsconfig ./jsconfig.json",
+    "watch": "vite build --watch"
+  },
+  "devDependencies": {
+    "@sveltejs/vite-plugin-svelte": "^3.0.0",
+    "@vitejs/plugin-vue": "^5.0.0",
+    "autoprefixer": "^10.4.0",
+    "eslint": "^8.57.0",
+    "eslint-config-prettier": "^9.1.0",
+    "eslint-plugin-svelte": "^2.35.0",
+    "eslint-plugin-vue": "^9.20.0",
+    "postcss": "^8.4.0",
+    "prettier": "^3.2.0",
+    "prettier-plugin-svelte": "^3.1.0",
+    "svelte": "^4.2.0",
+    "svelte-check": "^3.6.0",
+    "typescript": "^5.3.0",
+    "vite": "^5.1.0",
+    "vue": "^3.4.0"
+  },
+  "dependencies": {
+    "@headlessui/vue": "^1.7.0",
+    "@heroicons/vue": "^2.0.0",
+    "@tailwindcss/forms": "^0.5.0",
+    "axios": "^1.6.0",
+    "clsx": "^2.1.0",
+    "tailwindcss": "^3.4.0",
+    "tailwind-merge": "^2.2.0"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "funnel",
+    "conversational-forms",
+    "svelte",
+    "vue",
+    "lead-generation"
+  ],
+  "author": "Ze-Funnel Team",
+  "license": "GPL-2.0+",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/your-org/ze-funnel.git"
+  },
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
