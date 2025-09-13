@@ -57,13 +57,6 @@
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)
   }
 
-  function getInputType(field) {
-    if (field.type === 'email') return 'email'
-    if (field.type === 'tel' || field.type === 'phone') return 'tel'
-    if (field.type === 'number') return 'number'
-    if (field.type === 'url') return 'url'
-    return 'text'
-  }
 </script>
 
 <div class="ze-multi-input">
@@ -112,10 +105,54 @@
           />
           <span class="ze-checkbox-text">{field.text || field.label}</span>
         </label>
+      {:else if field.type === 'email'}
+        <input
+          id="field-{field.name}"
+          type="email"
+          class="ze-text-input"
+          class:error={errors[field.name]}
+          placeholder={field.placeholder || ''}
+          bind:value={formData[field.name]}
+          on:input={() => handleInput(field.name)}
+          on:blur={() => handleInput(field.name)}
+        />
+      {:else if field.type === 'tel' || field.type === 'phone'}
+        <input
+          id="field-{field.name}"
+          type="tel"
+          class="ze-text-input"
+          class:error={errors[field.name]}
+          placeholder={field.placeholder || ''}
+          bind:value={formData[field.name]}
+          on:input={() => handleInput(field.name)}
+          on:blur={() => handleInput(field.name)}
+        />
+      {:else if field.type === 'number'}
+        <input
+          id="field-{field.name}"
+          type="number"
+          class="ze-text-input"
+          class:error={errors[field.name]}
+          placeholder={field.placeholder || ''}
+          bind:value={formData[field.name]}
+          on:input={() => handleInput(field.name)}
+          on:blur={() => handleInput(field.name)}
+        />
+      {:else if field.type === 'url'}
+        <input
+          id="field-{field.name}"
+          type="url"
+          class="ze-text-input"
+          class:error={errors[field.name]}
+          placeholder={field.placeholder || ''}
+          bind:value={formData[field.name]}
+          on:input={() => handleInput(field.name)}
+          on:blur={() => handleInput(field.name)}
+        />
       {:else}
         <input
           id="field-{field.name}"
-          type={getInputType(field)}
+          type="text"
           class="ze-text-input"
           class:error={errors[field.name]}
           placeholder={field.placeholder || ''}

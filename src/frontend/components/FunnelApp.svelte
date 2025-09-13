@@ -9,7 +9,7 @@
   import ThankYouScreen from './ThankYouScreen.svelte'
 
   export let funnelData
-  export let containerId
+  export const containerId = null
 
   const dispatch = createEventDispatcher()
 

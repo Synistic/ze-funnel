@@ -7,7 +7,7 @@
   import MultiInput from './inputs/MultiInput.svelte'
 
   export let question
-  export let questionIndex
+  export const questionIndex = 0
 
   const dispatch = createEventDispatcher()
 

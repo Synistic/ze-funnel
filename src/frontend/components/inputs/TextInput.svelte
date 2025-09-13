@@ -36,15 +36,27 @@
 </script>
 
 <div class="ze-input-group">
-  <input
-    type={question.validation?.email ? 'email' : 'text'}
-    class="ze-text-input"
-    class:error={errors.length > 0}
-    placeholder={question.placeholder || 'Ihre Antwort...'}
-    bind:value
-    on:input={handleInput}
-    on:blur={handleInput}
-  />
+  {#if question.validation?.email}
+    <input
+      type="email"
+      class="ze-text-input"
+      class:error={errors.length > 0}
+      placeholder={question.placeholder || 'Ihre Antwort...'}
+      bind:value
+      on:input={handleInput}
+      on:blur={handleInput}
+    />
+  {:else}
+    <input
+      type="text"
+      class="ze-text-input"
+      class:error={errors.length > 0}
+      placeholder={question.placeholder || 'Ihre Antwort...'}
+      bind:value
+      on:input={handleInput}
+      on:blur={handleInput}
+    />
+  {/if}
   
   {#if errors.length > 0}
     <div class="ze-field-errors">
