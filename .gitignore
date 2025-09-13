@@ -6,8 +6,8 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# Build outputs
-dist/
+# Build outputs (keep dist/ for WordPress plugin)
+# dist/  <- Don't ignore dist/ for WordPress plugins
 build/
 .output
 .vite
@@ -79,7 +79,7 @@ bower_components
 
 # Nuxt.js build / generate output
 .nuxt
-dist
+# dist  <- Keep for WordPress
 
 # Gatsby files
 .cache/
