@@ -2,65 +2,64 @@ import { createApp } from 'vue'
 import AdminApp from './components/AdminApp.vue'
 
 /**
- * Initialize Ze Funnel Admin Application
+ * Ze Funnel Admin - Global initialization
  */
-class ZeFunnelAdmin {
-  constructor() {
-    this.app = null
-    this.isInitialized = false
+function initZeFunnelAdmin() {
+  // Make sure we don't initialize twice
+  if (window.ZeFunnelAdminInitialized) {
+    return
   }
 
-  /**
-   * Initialize admin app
-   */
-  init() {
-    const container = document.getElementById('ze-funnel-admin-app')
+  const container = document.getElementById('ze-funnel-admin-app')
+  
+  if (!container) {
+    console.warn('Ze Funnel Admin: Container not found')
+    return
+  }
+
+  try {
+    console.log('Ze Funnel Admin: Starting initialization...')
     
-    if (!container) {
-      console.warn('Ze Funnel Admin: Container not found')
-      return
-    }
+    // Create Vue app
+    const app = createApp(AdminApp, {
+      funnelId: container.dataset.funnelId || null,
+      apiUrl: window.zeFunnelAdmin?.restUrl || '',
+      nonce: window.zeFunnelAdmin?.nonce || ''
+    })
 
-    try {
-      // Create Vue app
-      this.app = createApp(AdminApp, {
-        funnelId: container.dataset.funnelId || null,
-        apiUrl: window.zeFunnelAdmin?.restUrl || '',
-        nonce: window.zeFunnelAdmin?.nonce || ''
-      })
-
-      // Mount app
-      this.app.mount(container)
-      this.isInitialized = true
-      
-      console.log('Ze Funnel Admin: Initialized successfully')
-    } catch (error) {
-      console.error('Ze Funnel Admin: Initialization failed', error)
-    }
-  }
-
-  /**
-   * Destroy admin app
-   */
-  destroy() {
-    if (this.app && this.isInitialized) {
-      this.app.unmount()
-      this.app = null
-      this.isInitialized = false
+    // Mount app
+    app.mount(container)
+    
+    // Store reference globally
+    window.ZeFunnelAdminApp = app
+    window.ZeFunnelAdminInitialized = true
+    
+    console.log('Ze Funnel Admin: Initialized successfully')
+  } catch (error) {
+    console.error('Ze Funnel Admin: Initialization failed', error)
+    
+    // Show fallback message
+    if (container) {
+      container.innerHTML = `
+        <div class="notice notice-error">
+          <p><strong>Ze Funnel Admin Error:</strong> Failed to load admin interface.</p>
+          <p>Please refresh the page or check the browser console for details.</p>
+        </div>
+      `
     }
   }
 }
 
-// Global instance
-window.ZeFunnelAdmin = new ZeFunnelAdmin()
+// Create simple API for WordPress to call
+window.ZeFunnelAdmin = {
+  init: initZeFunnelAdmin,
+  initialized: false
+}
 
-// Auto-initialize when DOM is ready
+// Auto-initialize
 if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', () => {
-    window.ZeFunnelAdmin.init()
-  })
+  document.addEventListener('DOMContentLoaded', initZeFunnelAdmin)
 } else {
-  window.ZeFunnelAdmin.init()
+  // DOM already loaded
+  initZeFunnelAdmin()
 }
-
-export default ZeFunnelAdmin

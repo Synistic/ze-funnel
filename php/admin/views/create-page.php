@@ -111,12 +111,29 @@ html.js noscript {
 // Add JS class to html element
 document.documentElement.className += ' js';
 
-// Initialize Vue admin app when DOM is ready
+// Fallback initialization with timeout
 document.addEventListener('DOMContentLoaded', function() {
-    if (typeof ZeFunnelAdmin !== 'undefined') {
-        ZeFunnelAdmin.init();
-    } else {
-        console.warn('Ze Funnel Admin JavaScript not loaded');
-    }
+    // Give time for the admin script to load
+    setTimeout(function() {
+        if (typeof ZeFunnelAdmin !== 'undefined' && ZeFunnelAdmin.init) {
+            try {
+                ZeFunnelAdmin.init();
+                console.log('Ze Funnel Admin: Manual init called');
+            } catch (error) {
+                console.error('Ze Funnel Admin: Manual init failed', error);
+                showFallback();
+            }
+        } else {
+            console.warn('Ze Funnel Admin JavaScript not loaded - showing fallback');
+            showFallback();
+        }
+    }, 100);
 });
+
+function showFallback() {
+    const container = document.getElementById('ze-funnel-admin-app');
+    if (container) {
+        container.innerHTML = '<div class="notice notice-warning"><p>Admin interface loading... If this message persists, please refresh the page.</p></div>';
+    }
+}
 </script>

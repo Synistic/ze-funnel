@@ -8,19 +8,16 @@ export default defineConfig({
   
   build: {
     outDir: 'dist/admin',
-    lib: {
-      entry: resolve(__dirname, 'src/admin/main.js'),
-      name: 'ZeFunnelAdmin',
-      fileName: 'ze-funnel-admin',
-      formats: ['iife']
-    },
     rollupOptions: {
+      input: resolve(__dirname, 'src/admin/main.js'),
       output: {
         entryFileNames: 'ze-funnel-admin.js',
         assetFileNames: (assetInfo) => {
           if (assetInfo.name === 'style.css') return 'ze-funnel-admin.css'
           return assetInfo.name
-        }
+        },
+        format: 'iife',
+        name: 'ZeFunnelAdminBundle'
       }
     },
     sourcemap: true,
